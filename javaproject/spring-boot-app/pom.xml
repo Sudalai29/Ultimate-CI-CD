@@ -55,7 +55,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- Ensure using a version compatible with Java 17 -->
+                <version>3.13.0</version> <!-- Ensure using a version compatible with Java 17 -->
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -64,7 +64,7 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>4.0.0.2929</version> <!-- Update to a version compatible with Java 17 -->
+                <version>4.0.0.4121</version> <!-- Update to a version compatible with Java 17 -->
             </plugin>
             <!-- Other plugins -->
         </plugins>
