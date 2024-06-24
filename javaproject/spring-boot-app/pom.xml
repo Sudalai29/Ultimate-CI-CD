@@ -2,67 +2,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.abhishek</groupId>
-    <artifactId>spring-boot-demo</artifactId>
-    <version>1.0</version>
-
-    <name>spring-boot-demo</name>
-    <url></url>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <!-- Update to a version that supports Java 16, Spring Boot 2.6.0 is a good candidate -->
-        <version>2.6.0</version>
-    </parent>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Update Java version to 16 -->
-        <java.version>16</java.version>
-        <!-- Maven compiler and source/target are set to Java 16 -->
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>
-
-    <dependencies>
-        <!-- Update Spring Boot dependencies versions -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <!-- Update to the latest version compatible with Spring Boot 2.6.0 -->
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <!-- Update to the latest version compatible with Spring Boot 2.6.0 -->
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <!-- Update to the latest version compatible with Spring Boot 2.6.0 -->
-        </dependency>
-        <!-- debugging -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <!-- Update to the latest version compatible with Spring Boot 2.6.0 -->
-        </dependency>
-        
-        <!-- SonarQube dependency -->
-        <dependency>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-            <version>3.9.1.2184</version> <!-- Compatible version with Java 16 -->
-        </dependency>
-    </dependencies>
+    <!-- Existing parts of your POM file -->
 
     <build>
-        <finalName>spring-boot-web</finalName>
+        <pluginManagement>
+            <plugins>
+                <!-- Maven Toolchains Plugin to specify Java version -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-toolchains-plugin</artifactId>
+                    <version>1.1</version> <!-- Adjust version if needed -->
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>toolchain</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <toolchains>
+                            <jdk>
+                                <version>16</version>
+                                <vendor>adoptopenjdk</vendor>
+                            </jdk>
+                        </toolchains>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <!-- Your existing build section with plugins -->
         <plugins>
             <!-- Spring Boot Maven plugin -->
             <plugin>
@@ -71,17 +40,11 @@
                 <!-- Update to the latest version compatible with Spring Boot 2.6.0 -->
                 <version>2.6.0</version>
             </plugin>
+
             <!-- Maven compiler plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <!-- Ensure the version supports Java 16 -->
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
+            <!-- Remove existing Maven compiler plugin configuration -->
+            <!-- Maven Toolchains Plugin will manage the JDK version -->
+
             <!-- SonarQube plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
@@ -91,4 +54,7 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Ensure other parts of your POM file are correctly configured -->
+
 </project>
