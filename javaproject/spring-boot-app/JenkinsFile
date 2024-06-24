@@ -2,7 +2,7 @@ pipeline {
 
   agent {
     docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      image 'sudalai29/maven-docker-agent:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -10,7 +10,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
+        //git branch: 'main', url: 'https://github.com/Sudalai29/Ultimate-CI-CD.git'
       }
     }
     stage('Build and Test') {
@@ -30,7 +30,7 @@ pipeline {
         }
       }
     }
-    stage('Build and Push Docker Image') {
+         stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "sudalai29/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "javaproject/spring-boot-app/Dockerfile"
@@ -48,22 +48,22 @@ pipeline {
     }
     stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = ""
+            GIT_REPO_NAME = "Ultimate-CI-CD"
             GIT_USER_NAME = "sudalai29"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
-                    git config user.email "abhishek.xyz@gmail.com"
+                    git config user.email "sudalaikumar2129@gmail.com"
                     git config user.name "SudalaiMadan"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" javaproject/spring-boot-app-manifests/deployment.yml
                     git add javaproject/spring-boot-app-manifests/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                '''
-            }
+                '''                                                                                
         }
     }
   }
 }
+                                   
