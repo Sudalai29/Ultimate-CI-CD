@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 SpringBootApplication
-@Controller
+Controller
 public class StartApplication {
 
-    @GetMapping("/")
+    GetMapping("/")
     public String index(final Model model) {
         model.addAttribute("title", "I have successfully built a Spring Boot application using Maven");
         model.addAttribute("msg", "This application is deployed onto Kubernetes using Argo CD");
