@@ -16,8 +16,8 @@ on:
     branches: [ "codeQL" ]
   pull_request:
     branches: [ "codeQL" ]
-  #schedule:
-    #- cron: '29 7 * * 0'
+  schedule:
+    - cron: '29 7 * * 0'
 
 jobs:
   analyze:
